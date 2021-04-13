@@ -1,4 +1,8 @@
 package ca.sheridancollege.project;
+/*This class is specifically for our War game. It gives the player 2 decks
+ * which will be used to show hands to be played and won hands.
+ * @author Austin Priest, Emre Erdonmez, Jaycob Bond
+*/
 
 public class WarPlayer extends Player {
 

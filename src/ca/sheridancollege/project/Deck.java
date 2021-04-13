@@ -1,4 +1,8 @@
 package ca.sheridancollege.project;
+/* Used to fill and split the deck. They are used specifically for 
+ * our game of War.
+ * @author Austin Priest, Emre Erdonmez, Jaycob Bond
+*/
 
 public class Deck extends GroupOfCards {
 

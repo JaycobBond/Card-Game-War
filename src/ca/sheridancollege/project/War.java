@@ -1,5 +1,10 @@
 package ca.sheridancollege.project;
 import java.util.Scanner;
+/* Contains all methods used for running the game. Has 2 players
+ * which contain the decks used throughout the game. The two decks
+ * belong to no one but are needed temporarily throughout.
+ * @author Austin Priest, Emre Erdonmez, Jaycob Bond
+*/
 
 public class War extends Game {
     
