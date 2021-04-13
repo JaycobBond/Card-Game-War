@@ -13,7 +13,6 @@ public class Test {
     
     public static void main(String[] args) {
         War war = new War();
-        System.out.println("The game is called " + war.getGameName());
         war.play();
 
     }

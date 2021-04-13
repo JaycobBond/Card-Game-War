@@ -20,16 +20,12 @@ public abstract class Player {
             
         }
 
-	/**
-	 * The method to be instantiated when you subclass the Player class
-	 * with your specific type of Player and filled in with logic to play your game.
-	 */
-	public abstract void play();
-
+        //returns the name of the player
 	public String getPlayerID() {
             return this.playerID;
 	}
 
+        //sets the name of the player
 	public void setPlayerID(String name) {
             this.playerID = name;
 	}

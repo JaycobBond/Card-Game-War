@@ -12,6 +12,7 @@ public class Deck extends GroupOfCards {
             this.setSize(givenSize);
 	}
 
+        //fills the deck in order with the specified size
 	public void fillDeck() {
             WarCard card = new WarCard();
             int size = this.getSize();
@@ -20,6 +21,7 @@ public class Deck extends GroupOfCards {
             }
 	}
         
+        //splits the deck in half
         public void splitDeck(Deck deck1, Deck deck2) {
             int originalSize = this.getSize();
             for (int i = 0; i < originalSize; i++) {
@@ -31,10 +33,5 @@ public class Deck extends GroupOfCards {
                 }
             }
         }
-
-	public void append() {
-		// TODO - implement Deck.append
-		throw new UnsupportedOperationException();
-	}
 
 }

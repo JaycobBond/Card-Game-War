@@ -21,11 +21,26 @@ public class WarPlayer extends Player {
         public WarPlayer(String name) {
             this.setPlayerID(name);
         }
+        
+        //sets the player's main deck
+        public void setDeck(Deck newDeck) {
+            this.deck = newDeck;
+        }
+        
+        //returns the player's main deck
+        public Deck getDeck() {
+            return this.deck;
+        }
+        
+        //sets the player's side deck
+        public void setSideDeck(Deck newDeck) {
+            this.sideDeck = newDeck;
+        }
+        
+        //returns the player's side deck
+        public Deck getSideDeck() {
+            return this.sideDeck;
+        }
 
-
-	public void play() {
-		// TODO - implement WarPlayer.play
-		throw new UnsupportedOperationException();
-	}
 
 }

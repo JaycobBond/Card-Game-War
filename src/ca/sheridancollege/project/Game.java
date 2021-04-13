@@ -6,6 +6,7 @@ import java.util.*;
  * The class that models your game. You should create a more specific
  * child of this class and instantiate the methods given.
  * @author dancye
+ * @modifier Austin Priest, Emre Erdonmez, Jaycob Bond
  */
 public abstract class Game {
 
@@ -15,18 +16,22 @@ public abstract class Game {
 	 */
 	private Collection<Player> players;
 
+        //returns the name of the game
 	public String getGameName() {
 		return this.gameName;
 	}
         
+        //sets the name of the game
         public void setGameName(String newName) {
             this.gameName = newName;
         }
 
+        //returns a list of players
 	public Collection<Player> getPlayers() {
 		return this.players;
 	}
 
+        //sets the list of players
 	public void setPlayers(Collection<Player> players) {
 		this.players = players;
 	}
@@ -40,8 +45,7 @@ public abstract class Game {
 	 * @param givenName
 	 */
 	public Game(String givenName) {
-		// TODO - implement Game.Game
-		throw new UnsupportedOperationException();
+            this.gameName = givenName;
 	}
 
 	/**

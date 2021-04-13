@@ -2,102 +2,153 @@ package ca.sheridancollege.project;
 import java.util.Scanner;
 
 public class War extends Game {
+    
+        private WarPlayer player1, player2;
+        private Deck tiedDeck, mainDeck;
 
+        //runs the 26 rounds of comparison
 	public void compareCards() {
-		// TODO - implement War.compareCards
-		throw new UnsupportedOperationException();
+            Card p1Draw = new WarCard();
+            Card p2Draw = new WarCard();
+            
+            for (int i = 0; i < 26; i++) {
+                System.out.println("Round " + (i + 1));
+                p1Draw = player1.getDeck().dealCard();
+                p2Draw = player2.getDeck().dealCard();
+                
+                checkCards(p1Draw, p2Draw);
+            }
 	}
-
-	public void checkCards(WarPlayer player1, WarPlayer player2) {
-		// TODO - implement War.checkCards
-		throw new UnsupportedOperationException();
+        
+        //checks the cards and places into the correct sidedeck
+	public void checkCards(Card p1Draw, Card p2Draw) {
+            
+            Card currentTiedCard = new WarCard();
+                
+                if (p1Draw.getRank() > p2Draw.getRank()) {
+                    System.out.println(player1.getPlayerID() + " wins the following cards: ");
+                    player1.getSideDeck().setCard(p1Draw);
+                    player1.getSideDeck().setCard(p2Draw);
+                    System.out.print(p1Draw + " " + p2Draw + " ");
+                    while (tiedDeck.getGroupOfCards().size() > 0) {
+                        currentTiedCard = tiedDeck.dealCard();
+                        player1.getSideDeck().setCard(currentTiedCard);
+                        System.out.print(currentTiedCard + " ");
+                    }
+                    System.out.println();
+                } else if (p1Draw.getRank() < p2Draw.getRank()) {
+                    System.out.println(player2.getPlayerID() + " wins the following cards: ");
+                    player2.getSideDeck().setCard(p1Draw);
+                    player2.getSideDeck().setCard(p2Draw);
+                    System.out.print(p1Draw + " " + p2Draw + " ");
+                    while (tiedDeck.getGroupOfCards().size() > 0) {
+                        currentTiedCard = tiedDeck.dealCard();
+                        player2.getSideDeck().setCard(currentTiedCard);
+                        System.out.print(currentTiedCard + " ");
+                    }
+                    System.out.println();
+                } else {
+                    System.out.println("Round was tied.");
+                    tiedDeck.setCard(p1Draw);
+                    tiedDeck.setCard(p2Draw);
+                }
+                System.out.println();
 	}
 
 	public War() {
             this.setGameName("War");
 	}
         
+        //asks the players for their names and sets them
         public void getNames() {
             Scanner input = new Scanner(System.in);
             System.out.println("Please enter the name for player 1: ");
             String name = input.nextLine();
-            WarPlayer player1 = new WarPlayer(name);
+            player1 = new WarPlayer(name);
             
             System.out.println("Please enter the name for player 2: ");
             name = input.nextLine();
-            WarPlayer player2 = new WarPlayer(name);
+            player2 = new WarPlayer(name);
         }
-
-	public void play() {
-            Scanner input = new Scanner(System.in);
-            System.out.println("Please enter the name for player 1: ");
-            String name = input.nextLine();
-            WarPlayer player1 = new WarPlayer(name);
+        
+        //creates all necessary decks
+        public void createDecks() {
+            mainDeck = new Deck(52);
+            player1.setDeck(new Deck(26));
+            player2.setDeck(new Deck(26));
+            player1.setSideDeck(new Deck(52));
+            player2.setSideDeck(new Deck(52));
             
-            System.out.println("Please enter the name for player 2: ");
-            name = input.nextLine();
-            WarPlayer player2 = new WarPlayer(name);
+            tiedDeck = new Deck(52);
             
-            System.out.println(player1.getPlayerID() + " " + player2.getPlayerID());
-            
-            Deck mainDeck = new Deck(52);
                     
             mainDeck.fillDeck();
             mainDeck.shuffle();
-            mainDeck.showCards();
             
-            Deck p1Deck = new Deck(26);
-            Deck p2Deck = new Deck(26);
-            Deck p1SideDeck = new Deck(52);
-            Deck p2SideDeck = new Deck(52);
-            Deck tiedDeck = new Deck(52);
+            mainDeck.splitDeck(player1.getDeck(), player2.getDeck());
+        }
+
+        //the method used to run the game
+	public void play() {
+            getNames();
             
-            mainDeck.splitDeck(p1Deck, p2Deck);
+            System.out.println("Hello to " + player1.getPlayerID() + " and " 
+                    + player2.getPlayerID() + " and welcome to our game to our "
+                            + "game of " + this.getGameName() + "!!!");
+            
+            createDecks();
+            
             System.out.println();
-            p1Deck.showCards();
-            System.out.println();
-            p2Deck.showCards();
+            System.out.println("First we will split up the decks. ");
+            System.out.println("This is your deck, " + player1.getPlayerID() + "\n");
+            player1.getDeck().showCards();
             System.out.println();
             
-            Card p1Draw = new WarCard();
-            Card p2Draw = new WarCard();
-            for (int i = 0; i < 26; i++) {
-                p1Draw = p1Deck.dealCard();
-                p2Draw = p2Deck.dealCard();
-                
-                if (p1Draw.getRank() > p2Draw.getRank()) {
-                    p1SideDeck.setCard(p1Draw);
-                    p1SideDeck.setCard(p2Draw);
-                    while (tiedDeck.getGroupOfCards().size() > 0) {
-                        p1SideDeck.setCard(tiedDeck.dealCard());
-                    }
-                } else if (p1Draw.getRank() < p2Draw.getRank()) {
-                    p2SideDeck.setCard(p1Draw);
-                    p2SideDeck.setCard(p2Draw);
-                    while (tiedDeck.getGroupOfCards().size() > 0) {
-                        p2SideDeck.setCard(tiedDeck.dealCard());
-                    }
-                } else {
-                    System.out.println("hi");
-                    tiedDeck.setCard(p1Draw);
-                    tiedDeck.setCard(p2Draw);
-                    tiedDeck.showCards();
-                }
-            }
-            
-            p1SideDeck.showCards();
+            System.out.println("And this is your deck, " + player2.getPlayerID() + "\n");
+            player2.getDeck().showCards();
             System.out.println();
-            p2SideDeck.showCards(); 
+            
+            compareCards();
+            
+            
+            System.out.println("Here are the cards that " + player1.getPlayerID() + " has won: ");
+            player1.getSideDeck().showCards();
+            System.out.println();
+            System.out.println("And here are the cards that " + player2.getPlayerID() + " has won: ");
+            player2.getSideDeck().showCards(); 
             System.out.println();  
-            tiedDeck.showCards();
             
             
+            playAgain();
             
 	}
 
+        //determines winner based on who has more cards
 	public void declareWinner() {
-		// TODO - implement War.declareWinner
-		throw new UnsupportedOperationException();
+            if (player1.getSideDeck().getGroupOfCards().size() != player2.getSideDeck().getGroupOfCards().size()) {
+                System.out.print("Our final count shows that ");
+                if (player1.getSideDeck().getGroupOfCards().size() > player2.getSideDeck().getGroupOfCards().size())
+                    System.out.println(player1.getPlayerID() + " has won with a score of " + 
+                        player1.getSideDeck().getGroupOfCards().size() + " to " 
+                            + player2.getSideDeck().getGroupOfCards().size());
+                else if (player1.getSideDeck().getGroupOfCards().size() < player2.getSideDeck().getGroupOfCards().size())
+                    System.out.println(player2.getPlayerID() + " has won with a score of " + 
+                        player2.getSideDeck().getGroupOfCards().size() + " to " 
+                            + player1.getSideDeck().getGroupOfCards().size());
+            } else {
+                System.out.println("Looks like we have a tie! ");
+            }
 	}
+        
+        //asks the user if they would like to play again
+        public void playAgain() {
+            System.out.println("Would you like to play again? (y/n) ");
+            Scanner input = new Scanner(System.in);
+            String answer = input.nextLine();
+            if (answer.equalsIgnoreCase("y") || answer.equalsIgnoreCase("yes"))
+                play();
+            else 
+                System.out.println("Thank you for playing! ");
+        }
 
 }

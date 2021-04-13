@@ -5,6 +5,7 @@ package ca.sheridancollege.project;
  * enough to be instantiated for any Card game. Students wishing to add to the code
  * should remember to add themselves as a modifier.
  * @author dancye
+ * @modifier Austin Priest, Emre Erdonmez, Jaycob Bond
  */
 public abstract class Card {
 
@@ -24,5 +25,7 @@ public abstract class Card {
         public int getRank() {
             return this.rank;
         }
+        
+        
 
 }
