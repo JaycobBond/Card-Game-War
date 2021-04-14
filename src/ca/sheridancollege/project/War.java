@@ -25,6 +25,11 @@ public class War extends Game {
             }
 	}
         
+        public void setPlayers(WarPlayer player1, WarPlayer player2) {
+            this.player1 = player1;
+            this.player2 = player2;
+        }
+        
         //checks the cards and places into the correct sidedeck
 	public void checkCards(Card p1Draw, Card p2Draw) {
             
@@ -78,7 +83,7 @@ public class War extends Game {
         
         //creates all necessary decks
         public void createDecks() {
-            mainDeck = new Deck(52);
+            mainDeck = new Deck(53);
             player1.setDeck(new Deck(26));
             player2.setDeck(new Deck(26));
             player1.setSideDeck(new Deck(52));
@@ -122,6 +127,7 @@ public class War extends Game {
             System.out.println("And here are the cards that " + player2.getPlayerID() + " has won: ");
             player2.getSideDeck().showCards(); 
             System.out.println();  
+            declareWinner();
             
             
             playAgain();
@@ -130,6 +136,7 @@ public class War extends Game {
 
         //determines winner based on who has more cards
 	public void declareWinner() {
+            System.out.println(player1.getSideDeck().getGroupOfCards().size() + "    " + player2.getSideDeck().getGroupOfCards().size());
             if (player1.getSideDeck().getGroupOfCards().size() != player2.getSideDeck().getGroupOfCards().size()) {
                 System.out.print("Our final count shows that ");
                 if (player1.getSideDeck().getGroupOfCards().size() > player2.getSideDeck().getGroupOfCards().size())

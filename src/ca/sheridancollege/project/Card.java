@@ -16,15 +16,9 @@ public abstract class Card {
 	@Override
 	public abstract String toString();
         
-        private int rank;
+        public abstract void setRank(int num);
         
-        public void setRank(int num) {
-            this.rank = num;
-        }
-        
-        public int getRank() {
-            return this.rank;
-        }
+        public abstract int getRank();
         
         
 
